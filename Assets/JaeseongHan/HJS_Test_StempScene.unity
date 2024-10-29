@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 625131180}
   m_Layer: 0
   m_Name: CheckUpPoint
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed07b1115941e94aaaa3d311bce1a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: {fileID: 1639812114}
+  type: {fileID: 1381442121}
   boxCollider: {fileID: 0}
   useStampAbility: {fileID: 625131180}
 --- !u!54 &625131173
@@ -265,12 +265,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curType: 0
-  yellowMover2:
-    moveDistance: 4
-    moveSpeed: 20
-    xRotationThreshold: 0.1
-    zRotationThreshold: 0.1
-    targetYPosition: 0.5
+  blueMover:
+    rotationAngle: 0
+    rotationSpeed: 0
+    isRotating: 0
+    rotationTolerance: 0
+    player: {fileID: 0}
+    cubeMove: {fileID: 0}
+  yellowMover:
+    moveDistance: 0
+    moveSpeed: 0
+    xRotationThreshold: 0
+    zRotationThreshold: 0
+    playerTransform: {fileID: 0}
+    checkUpPoint: {fileID: 0}
 --- !u!1 &738300251
 GameObject:
   m_ObjectHideFlags: 0
