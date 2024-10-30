@@ -85,14 +85,28 @@ public class YellowMover : MonoBehaviour
     private float StartRay(Vector3 _dir)
     {
         // 노랑색 스템프의 이동 방향으로 Raycast
-        Physics.Raycast(transform.position, _dir, out RaycastHit hit, _moveDistance + 1, _yellowMask);
+        if (Physics.Raycast(transform.position, _dir, out RaycastHit hit, _moveDistance + 1, _yellowMask))
+        {
+            Debug.Log(hit.transform);
 
-        Debug.Log(hit.transform);
+            // 검사되는 물체가 "CrackedRock" 태그를 가진 경우
+            if (hit.transform.CompareTag("CrackedRock"))
+            {
+                StartCoroutine(DestroyCrackedRock(hit.transform.gameObject)); // CrackedRock 파괴 코루틴 시작
+                return Mathf.Floor(Vector3.Distance(transform.position, hit.point)); // 충돌 위치 바로 앞에서 멈춤
+            }
+
+            // 큐브와 블록이 맞닿아 있을 때 거리를 1로 정확히 맞춤
+            return Mathf.Floor(Vector3.Distance(transform.position, hit.point));
+        }
 
         // 검사되는 물체가 없다면 최대 거리로 리턴
-        if (hit.transform == null) return _moveDistance;
+        return _moveDistance;
+    }
 
-        // 큐브와 블록이 맞닿아 있을 때 거리가 1이므로 검출되는 거리 - 1을 리턴
-        return (int)Vector3.Distance(transform.position, hit.transform.position) - 1;
+    private IEnumerator DestroyCrackedRock(GameObject crackedRock)
+    {
+        yield return new WaitForSeconds(0.1f); // 0.1초 대기
+        Destroy(crackedRock); // CrackedRock 파괴
     }
 }
